@@ -165,7 +165,8 @@ namespace IngameScript
             {
                 if (!(g is IMyLargeTurretBase))
                 {
-                    g.SetValueBool("Shoot", false);
+                    //g.SetValueBool("Shoot", false);
+                    g.ApplyAction(Shoot_On");
                     if (rocketMode != RocketMode.None)
                     {
                         IMySmallMissileLauncher m = g as IMySmallMissileLauncher;
@@ -358,7 +359,8 @@ namespace IngameScript
                     if (lastEnemy.HasValue)
                         CallHelp(lastEnemy.Value.Position);
                     foreach (IMyUserControllableGun g in guns)
-                        g.SetValueBool("Shoot", true);
+                       // g.SetValueBool("Shoot", true);
+                       g.ApplyAction("Shoot_On");
                     if (useRockets)
                     {
                         foreach (IMySmallMissileLauncher m in rockets)
@@ -369,7 +371,8 @@ namespace IngameScript
                 {
                     // Stoping fire
                     foreach (IMyUserControllableGun g in guns)
-                        g.SetValueBool("Shoot", false);
+                        //g.SetValueBool("Shoot", false);
+                        g.ApplyAction("Shoot_Off");
                     foreach (IMySmallMissileLauncher m in rockets)
                         m.SetValueBool("Shoot", false);
                 }
@@ -496,7 +499,8 @@ namespace IngameScript
                     thrust.Reset();
                     gyros.Reset();
                     foreach (IMyUserControllableGun g in guns)
-                        g.SetValueBool("Shoot", false);
+                        //g.SetValueBool("Shoot", false);
+                        g.ApplyAction("Shoot_Off");
                     fire = false;
                     Runtime.UpdateFrequency = UpdateFrequency.None;
                     break;
